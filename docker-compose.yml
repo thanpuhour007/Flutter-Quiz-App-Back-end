@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0       # Specify the MySQL version (use latest if version not specified)
+    container_name: mysql_db
+    restart: always         # Always restart unless stopped manually
+    environment:
+      MYSQL_ROOT_PASSWORD: password  # Set the root password
+      MYSQL_DATABASE: QuizAppDB         # Default database to be created
+      MYSQL_USER: myuser                 # Optional: specify a user
+      MYSQL_PASSWORD: password         # Password for the user
+    ports:
+      - "3306:3306"         # Expose port 3306 (default MySQL port)
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persist data to avoid data loss
+
+volumes:
+  mysql_data:
+    driver: local            # Store data in a local volume
